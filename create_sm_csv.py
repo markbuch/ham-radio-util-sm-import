@@ -6,6 +6,22 @@ import getpass
 
 def add_ve():
     print("Adding VE")
+    ve_list = []
+    for i in range(3):
+        ve = input(f"Please enter VE {i+1}'s callsign: ")
+        choice = input(f"You entered {ve}. Is that correct? Y/N ")
+        if choice.upper() == "Y":
+            ve_list.append(ve.upper())
+        else:
+            ve = input(f"Please re-enter VE {i + 1}'s callsign: ")
+            choice = input(f"You entered {ve}. Is that correct? Y/N ")
+            if choice.upper() == "Y":
+                ve_list.append(ve.upper())
+            else:
+                print("Exiting program.  Please try again.")
+
+    print(f"list contains: {ve_list}")
+    return None
 
 
 def get_login_creds():
@@ -30,18 +46,21 @@ available_choices = {
 # will use "0" as exit
 
 while current_choice != "0":
-    print("Please chose an option")
-    print("-" * 25)
-    print(f" DEBUG:: Available Choices: {available_choices}")
+
     if current_choice in available_choices:
         print(f"DEBUG:: Current Choice: {current_choice}")
         if current_choice == "1":
-            print("DEBUG:: Current Choice is 1")
+            add_ve()
         elif current_choice == "2":
-
+            get_login_creds()
+        elif current_choice == "3":
+            create_csv()
+        else:
+            print("DEBUG:: Reprint Menu.")
 
     else:
-        print("Please chose from the menu")
+        print("Please chose an option")
+        print("-" * 25)
         for key, value in available_choices.items():
             # print(key, value, sep=": ")
             print(f"{key}: {value}")
