@@ -8,23 +8,28 @@ def add_ve():
     print("Adding VE")
     ve_list = []
     for i in range(3):
-        ve = input(f"Please enter VE {i+1}'s callsign: ")
-        choice = input(f"You entered {ve}. Is that correct? Y/N ")
+        ve = input(f"Please enter VE {i+1}'s callsign > ")
+        choice = input(f"You entered {ve.upper()}. Is that correct? Y/N > ")
         if choice.upper() == "Y":
             ve_list.append(ve.upper())
         else:
             ve = input(f"Please re-enter VE {i + 1}'s callsign: ")
-            choice = input(f"You entered {ve}. Is that correct? Y/N ")
+            choice = input(f"You entered {ve.upper()}. Is that correct? Y/N >")
             if choice.upper() == "Y":
                 ve_list.append(ve.upper())
             else:
-                print("Exiting program.  Please try again.")
+                print("Exiting program.  Please try again. >")
 
-    print(f"list contains: {ve_list}")
-    return None
+    #  print(f"list contains: {ve_list}")
+    return tuple(ve_list)
 
 
 def get_login_creds():
+    # get password code to obscure password entry
+    # pwd = getpass.getpass(prompt='Password: ')
+    # print(f'Password: {pwd}')
+    email_account = input("Enter the email address to login with > ")
+
     print("Get Credentials")
 
 
@@ -34,23 +39,21 @@ def create_csv():
 
 #  Main Menu
 current_choice = None
+
+# will use "0" as exit
 available_choices = {
     "1": "Add Signing VEs",
     "2": "Enter Login Credentials",
     "3": "Get Registered users and Create CSV",
 }
 
-# get password code to obscure password entry
-# pwd = getpass.getpass(prompt='Password: ')
-# print(f'Password: {pwd}')
-# will use "0" as exit
-
 while current_choice != "0":
 
     if current_choice in available_choices:
         print(f"DEBUG:: Current Choice: {current_choice}")
         if current_choice == "1":
-            add_ve()
+            ves = add_ve()
+            print(f"Tuple of VEs: {ves}")
         elif current_choice == "2":
             get_login_creds()
         elif current_choice == "3":
