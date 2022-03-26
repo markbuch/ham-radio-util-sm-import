@@ -5,16 +5,18 @@ import getpass
 
 
 def print_menu(menu_choices):
+    #  print the main menu
     print("Please choose a Menu option")
-    print("-" * 25)
+    print("-" * 27)
     for key, value in menu_choices.items():
         # print(key, value, sep=": ")
         print(f"{key}: {value}")
     print("0: To exit program")
 
 
-def get_ves():
-    print("Adding VEs")
+def get_certifying_ves():
+    #  Get signing VEs from user
+    print("DEBUG:: Adding VEs")
     ve_list = []
     for i in range(3):
         ve = input(f"Please enter VE {i+1}'s callsign > ")
@@ -36,21 +38,34 @@ def get_ves():
                 print("Exiting to Main Menu")
                 break
 
-    #  print(f"list contains: {ve_list}")
+    #  return list of VEs as a Tuple, since list of VEs need to maintain order.
     return tuple(ve_list)
 
 
 def get_mail_server():
-    print("Get Mail Server address")
+    print("DEBUG:: Get Mail Server address")
+    mail_server = input("Enter the url for the mail server >")
+    return mail_server.strip()
 
 
 def get_login_creds():
-    # get password code to obscure password entry
+    print("DEBUG:: Get Credentials")
+    # Get mail user and password from input
     # pwd = getpass.getpass(prompt='Password: ')
     # print(f'Password: {pwd}')
-    email_account = input("Enter the email address to login with > ")
+    email_user = input("Enter the email address to login with > ")
+    print(f'DEBUG:: You entered {email_user}.')
+    pwd = getpass.getpass(prompt='Enter Password > ')
+    print(f'Password: {pwd}')
+    return email_user.strip(), pwd.strip()
 
-    print("Get Credentials")
+
+def login_to_mail_server():
+    print(f'DEBUG:: Enter login to mail server')
+
+
+def get_email_registrations():
+    print('DEBUG:: getting emails')
 
 
 def create_csv():
@@ -73,7 +88,7 @@ while current_choice != "0":
     if current_choice in available_choices:
         print(f"DEBUG:: Current Choice: {current_choice}")
         if current_choice == "1":
-            ves = get_ves()
+            ves = get_certifying_ves()
             if len(ves) == 3:
                 print(f"Tuple of VEs: {ves}")
             else:
