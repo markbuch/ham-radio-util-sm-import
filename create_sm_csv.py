@@ -92,7 +92,8 @@ while current_choice != "0":
             if len(ves) == 3:
                 print(f"Tuple of VEs: {ves}")
             else:
-                print_menu(available_choices)
+                # print_menu(available_choices)
+                continue
         elif current_choice == "2":
             get_mail_server()
         elif current_choice == "3":
