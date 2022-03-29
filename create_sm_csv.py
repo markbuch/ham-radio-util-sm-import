@@ -72,38 +72,43 @@ def create_csv():
     print("create csv")
 
 
-#  Main Menu
-current_choice = None
+def main():
 
-# will use "0" as exit
-available_choices = {
-    "1": "Add Signing VEs",
-    "2": "Enter Mail Server",
-    "3": "Enter Login Credentials",
-    "4": "Get Registered users and Create CSV",
-}
+    current_choice = None
 
-while current_choice != "0":
+    # Define main menu options.  "0" will be used for exit.
+    available_choices = {
+        "1": "Add Signing VEs",
+        "2": "Enter Mail Server",
+        "3": "Enter Login Credentials",
+        "4": "Get Registered users and Create CSV",
+    }
 
-    if current_choice in available_choices:
-        print(f"DEBUG:: Current Choice: {current_choice}")
-        if current_choice == "1":
-            ves = get_certifying_ves()
-            if len(ves) == 3:
-                print(f"Tuple of VEs: {ves}")
+    while current_choice != "0":
+
+        if current_choice in available_choices:
+            print(f"DEBUG:: Current Choice: {current_choice}")
+            if current_choice == "1":
+                ves = get_certifying_ves()
+                if len(ves) == 3:
+                    print(f"Tuple of VEs: {ves}")
+                else:
+                    # print_menu(available_choices)
+                    continue
+            elif current_choice == "2":
+                get_mail_server()
+            elif current_choice == "3":
+                get_login_creds()
+            elif current_choice == "4":
+                create_csv()
             else:
-                # print_menu(available_choices)
-                continue
-        elif current_choice == "2":
-            get_mail_server()
-        elif current_choice == "3":
-            get_login_creds()
-        elif current_choice == "4":
-            create_csv()
-        else:
-            print("DEBUG:: Reprint Menu.")
+                print("DEBUG:: Reprint Menu.")
 
-    else:
-        # Display the menu
-        print_menu(available_choices)
-    current_choice = input("> ")
+        else:
+            # Display the menu
+            print_menu(available_choices)
+        current_choice = input("> ")
+
+
+if __name__ == "__main__":
+    main()
