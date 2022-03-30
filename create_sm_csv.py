@@ -44,7 +44,12 @@ def get_certifying_ves():
 
 def get_mail_server():
     print("DEBUG:: Get Mail Server address")
-    mail_server = input("Enter the url for the mail server >")
+    mail_server = input("Enter the mail server URL > ")
+    choice = input(f"You entered {mail_server}. Is that correct? Y/N, Press C to Cancel.")
+    if choice.upper() == "C":
+        print("Exiting to Main Menu.  Press ENTER to continue.")
+        return
+
     return mail_server.strip()
 
 
@@ -83,23 +88,26 @@ def main():
         "3": "Enter Login Credentials",
         "4": "Get Registered users and Create CSV",
     }
-
+    ves = None
     while current_choice != "0":
 
         if current_choice in available_choices:
             print(f"DEBUG:: Current Choice: {current_choice}")
             if current_choice == "1":
                 ves = get_certifying_ves()
-                if len(ves) == 3:
-                    print(f"Tuple of VEs: {ves}")
-                else:
-                    # print_menu(available_choices)
-                    continue
+                if len(ves) != 3:
+                    print(f"A total of 3 VEs are required.  # of VEs entered: {ves}. Exiting program, please try again.")
+                    break
+                print(f"You entered the following VEs: {ves}", "Press ENTER to continue.")
             elif current_choice == "2":
                 get_mail_server()
             elif current_choice == "3":
                 get_login_creds()
             elif current_choice == "4":
+                # Login
+                # Retrieved registered applicants
+                # Process downloads
+                # create csv
                 create_csv()
             else:
                 print("DEBUG:: Reprint Menu.")
