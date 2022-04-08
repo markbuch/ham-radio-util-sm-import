@@ -98,17 +98,30 @@ def main():
                 if len(ves) != 3:
                     print(f"A total of 3 VEs are required.  # of VEs entered: {ves}. Exiting program, please try again.")
                     break
-                print(f"You entered the following VEs: {ves}", "Press ENTER to continue.")
+                print(f"You entered the following VEs: {ves}")
+                print()
+                current_choice = None
+                continue
             elif current_choice == "2":
                 get_mail_server()
+                print()
+                current_choice = None
+                continue
             elif current_choice == "3":
                 get_login_creds()
+                print()
+                current_choice = None
+                continue
             elif current_choice == "4":
                 # Login
                 # Retrieved registered applicants
                 # Process downloads
                 # create csv
                 create_csv()
+                print()
+                current_choice = None
+                continue
+
             else:
                 print("DEBUG:: Reprint Menu.")
 
