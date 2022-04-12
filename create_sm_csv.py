@@ -1,84 +1,11 @@
 # imports
-import getpass
-
-#  Function definitions
-
-
-def print_menu(menu_choices):
-    #  print the main menu
-    print("Please choose a Menu option")
-    print("-" * 27)
-    for key, value in menu_choices.items():
-        # print(key, value, sep=": ")
-        print(f"{key}: {value}")
-    print("0: To exit program")
-
-
-def get_certifying_ves():
-    #  Get signing VEs from user
-    print("DEBUG:: Adding VEs")
-    ve_list = []
-    for i in range(3):
-        ve = input(f"Please enter VE {i+1}'s callsign > ")
-        choice = input(f"You entered {ve.upper()}. Is that correct? Y/N, Press C to Cancel > ")
-        if choice.upper() == "Y":
-            ve_list.append(ve.upper())
-        elif choice.upper() == "C":
-            print("Exiting to Main Menu ")
-            break
-        else:
-            ve = input(f"Please re-enter VE {i + 1}'s callsign: ")
-            choice = input(f"You entered {ve.upper()}. Is that correct? Y/N, Press C to Cancel > ")
-            if choice.upper() == "Y":
-                ve_list.append(ve.upper())
-            elif choice.upper() == "C":
-                print("Exiting to Main Menu ")
-                break
-            else:
-                print("Exiting to Main Menu")
-                break
-
-    #  return list of VEs as a Tuple, since list of VEs need to maintain order.
-    return tuple(ve_list)
-
-
-def get_mail_server():
-    print("DEBUG:: Get Mail Server address")
-    mail_server = input("Enter the mail server URL > ")
-    choice = input(f"You entered {mail_server}. Is that correct? Y/N, Press C to Cancel.")
-    if choice.upper() == "C":
-        print("Exiting to Main Menu.  Press ENTER to continue.")
-        return
-
-    return mail_server.strip()
-
-
-def get_login_creds():
-    print("DEBUG:: Get Credentials")
-    # Get mail user and password from input
-    # pwd = getpass.getpass(prompt='Password: ')
-    # print(f'Password: {pwd}')
-    email_user = input("Enter the email address to login with > ")
-    print(f'DEBUG:: You entered {email_user}.')
-    pwd = getpass.getpass(prompt='Enter Password > ')
-    print(f'Password: {pwd}')
-    return email_user.strip(), pwd.strip()
-
-
-def login_to_mail_server():
-    print(f'DEBUG:: Enter login to mail server')
-
-
-def get_email_registrations():
-    print('DEBUG:: getting emails')
-
-
-def create_csv():
-    print("create csv")
+import funcs
+import datetime as dt
+import logging
+#  main entry point
 
 
 def main():
-
     current_choice = None
 
     # Define main menu options.  "0" will be used for exit.
@@ -87,28 +14,30 @@ def main():
         "2": "Enter Mail Server",
         "3": "Enter Login Credentials",
         "4": "Get Registered users and Create CSV",
+        "5": "Tell Jason Hi"
     }
-    ves = None
+    certifying_ves = None
     while current_choice != "0":
 
         if current_choice in available_choices:
             print(f"DEBUG:: Current Choice: {current_choice}")
             if current_choice == "1":
-                ves = get_certifying_ves()
-                if len(ves) != 3:
-                    print(f"A total of 3 VEs are required.  # of VEs entered: {ves}. Exiting program, please try again.")
+                certifying_ves = funcs.get_certifying_ves()
+                if len(certifying_ves) != 3:
+                    print(f"A total of 3 VEs are required.  "
+                          f"# of VEs entered: {certifying_ves}. Exiting program, please try again.")
                     break
-                print(f"You entered the following VEs: {ves}")
+                print(f"You entered the following VEs: {certifying_ves}")
                 print()
                 current_choice = None
                 continue
             elif current_choice == "2":
-                get_mail_server()
+                funcs.get_mail_server()
                 print()
                 current_choice = None
                 continue
             elif current_choice == "3":
-                get_login_creds()
+                funcs.get_login_creds()
                 print()
                 current_choice = None
                 continue
@@ -117,7 +46,7 @@ def main():
                 # Retrieved registered applicants
                 # Process downloads
                 # create csv
-                create_csv()
+                funcs.create_csv()
                 print()
                 current_choice = None
                 continue
@@ -127,7 +56,7 @@ def main():
 
         else:
             # Display the menu
-            print_menu(available_choices)
+            funcs.print_menu(available_choices)
         current_choice = input("> ")
 
 
