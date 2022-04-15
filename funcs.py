@@ -23,36 +23,61 @@ def get_ve(ve_num):
             continue
         choice = input(f"You entered {ve.upper()}. Is that correct? Y/N, or C to Cancel > ")
         if choice.upper() == "N":
+            if i == 1:
+                return "cancel"
             continue
         elif choice.upper() == "C":
-            print("Returning to Main Menu ")
-            break
+            print("Exiting program...")
+            return "cancel"
         else:
             return ve.upper()
 
 
 def get_certifying_ves():
     #  Get signing VEs from user
-    print("DEBUG:: Adding VEs")
+    print("DEBUG:: Getting VEs")
     ve_list = []
 
-    # Get VE #1
-    print("Getting VE 1")
-    ve_list.append(get_ve(1))
-    print(f"ve_list: {ve_list}")
+    for i in range(3):
+        print(f"Getting VE #{i+1}")
+        ve = get_ve(i+1)
+        if ve == "cancel":
+            return "NONE"
 
-    # Get Ve #2
-    print("Getting VE 2")
-    ve_list.append(get_ve(2))
-    print(f"ve_list: {ve_list}")
-
-    # Get VE #3
-    print("Getting VE 3")
-    ve_list.append(get_ve(3))
-    print(f"ve_list: {ve_list}")
-
+        ve_list.append(ve)
+        print(f"ve_list: {ve_list}")
     #  return list of VEs as a Tuple, since list of VEs need to maintain order.
     return tuple(ve_list)
+
+    # Get VE #1
+    # print("Getting VE 1")
+    # ve = get_ve(1)
+    # if ve == "cancel":
+    #     return "cancel"
+    #
+    # ve_list.append(ve)
+    # print(f"ve_list: {ve_list}")
+    #
+    # # Get Ve #2
+    # print("Getting VE 2")
+    # ve = get_ve(1)
+    # if ve == "cancel":
+    #     return "cancel"
+    #
+    # ve_list.append(ve)
+    # print(f"ve_list: {ve_list}")
+    #
+    # # Get VE #3
+    # print("Getting VE 3")
+    # ve = get_ve(1)
+    # if ve == "cancel":
+    #     return "cancel"
+    #
+    # ve_list.append(ve)
+    # print(f"ve_list: {ve_list}")
+    #
+    # #  return list of VEs as a Tuple, since list of VEs need to maintain order.
+    # return tuple(ve_list)
 
 
 def get_mail_server():

@@ -14,9 +14,8 @@ def main():
         "2": "Enter Mail Server",
         "3": "Enter Login Credentials",
         "4": "Get Registered users and Create CSV",
-        "5": "Tell Jason Hi"
     }
-    certifying_ves = None
+    # certifying_ves = None
     while current_choice != "0":
 
         if current_choice in available_choices:
@@ -24,8 +23,7 @@ def main():
             if current_choice == "1":
                 certifying_ves = funcs.get_certifying_ves()
                 if len(certifying_ves) != 3:
-                    print(f"A total of 3 VEs are required.  "
-                          f"# of VEs entered: {certifying_ves}. Exiting program, please try again.")
+                    print(f"A total of 3 VEs are required.  Exiting program, please try again.")
                     break
                 print(f"You entered the following VEs: {certifying_ves}")
                 print()
