@@ -22,20 +22,23 @@ def main():
             print(f"DEBUG:: Current Choice: {current_choice}")
             if current_choice == "1":
                 certifying_ves = funcs.get_certifying_ves()
-                if len(certifying_ves) != 3:
-                    print(f"A total of 3 VEs are required.  Exiting program, please try again.")
+                if certifying_ves == "None":
+                    print(f"Required number of VEs not entered.  Exiting program, please try again.")
                     break
-                print(f"You entered the following VEs: {certifying_ves}")
-                print()
-                current_choice = None
-                continue
+                else:
+                    print(f"You entered the following VEs: {certifying_ves}")
+                    print()
+                    current_choice = None
+                    continue
             elif current_choice == "2":
-                funcs.get_mail_server()
+                mail_srv = funcs.get_mail_server()
+                print(f"Mail Server: {mail_srv} accepted.")
                 print()
                 current_choice = None
                 continue
             elif current_choice == "3":
-                funcs.get_login_creds()
+                user_creds = funcs.get_login_creds()
+                print(f"user: {user_creds[0]} accepted")
                 print()
                 current_choice = None
                 continue
